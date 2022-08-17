@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- id는 중복 X -->
+        <input id="name" type="text" placeholder="이름 입력...">
+        <input id="age" type="text" placeholder="나이 입력....">
+        <input id="hobby" type="text" placeholder="취미 입력....">
+        <input id="location" type="text" placeholder="주소 입력....">
+        <button onclick="getName()">이름 확인</button>
+        <button onclick="getAge()">나이 확인</button>
+        <button onclick="getHobby()">취미 확인</button>
+        <!-- 버튼을 클릭했을 때 getName()이라는 함수를 호출하겠다. -->
+    </body>
+    <!-- script 태그가 body 아래에 있는 이유
+        html부터 실행하고 script를 실행하라는 의미!
+    -->
+    <script>
+        /* 자바스크립트 함수 특징
+            1. 리턴타입이 없다.
+            2. 함수에 파라미터값이 있으면, 파라미터값을 꼭 써주지 않아도 된다.
+        */
+
+        function getName(){
+            //var : 데이터 타입
+            var name = document.getElementById("name").value; //바닐라 js 문법
+            //document.getElementById("name").value : 아이디가 name인 태그(요소)에 값을 가져옴!
+            console.log('이름은 : '+name); //java에 System.out.println와 같다.
+            var location = document.getElementById("location").value;
+            console.log('주소는 : '+location);
+        }
+        
+        function getAge(){
+            //문제1. 나이 확인 버튼에 getAge 함수를 호출할 수 있게 로직을 수정하시오!
+            //문제2. id가 age인 태그(요소) 값을 출력하시오!
+            var age = document.getElementById("age").value;
+            console.log('나이는 : '+age);
+            if(age > 30){
+                console.log("계란 한판 추가요!");
+            }
+            if(age <= 30 && age >= 20){
+                console.log('20대!');
+            }
+        }
+        
+        function getHobby(){
+            var hobby = document.getElementById("hobby").value;
+            console.log('취미는 : '+hobby);
+            if(hobby == '등산'){ // java에서 문자열 비교는 equals 였으나, js는 == 연산자 사용!
+                console.log('취미는 등산입니다!');
+            }
+            if(hobby == '운동'){
+                console.log('취미는 운동입니다!');
+            }
+        }
+    </script>
+</html>
