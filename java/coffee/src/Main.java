@@ -1,4 +1,4 @@
-package coffee;
+package coffee_vendingMachine;
 
 public class Main {
 
