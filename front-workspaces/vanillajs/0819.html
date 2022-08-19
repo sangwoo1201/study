@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .container {
+                margin: 100px auto;
+                width: 200px;
+                height: auto;
+                background-color: #efefef;
+            }
+            div {
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>회원가입</h2>
+            <div>
+                <input id="userId" type="text" placeholder="아이디">
+            </div>
+            <div>
+                <input id="userPw" type="password" placeholder="비밀번호">
+            </div>
+            <div>
+                <input id="pwCheck" type="password" placeholder="비밀번호 재입력">
+            </div>
+            <div>
+                <button onclick="doJoin()">회원 가입</button>
+            </div>
+        </div>
+    </body>
+    <script>
+        function doJoin() {
+            //alert : 알림창
+            //문제 1. input 아이디에 입력된 값을 alert창에 출력!
+            var id = document.getElementById('userId').value;
+            //document : html 뜻 함
+            //getElementById : 아이디 이름으로 태그를 가져온다.
+            //value : 값
+            // alert('id : '+id);
+            //문제 2. 비밀번호와 비밀번호재입력 콘솔창으로 출력
+            var pw = document.getElementById('userPw').value;
+            var pwCheck = document.getElementById('pwCheck').value;
+            console.log('pw : '+pw+'\npwCheck : '+pwCheck);
+            //문제 3. 비밀번호와 비밀번호재입력이 다르면
+            //비밀번호가 일치하지 않습니다. alert 출력
+            if(pw != pwCheck) {
+                alert('비밀번호가 일치하지 않습니다.');
+                return false;
+            }
+            //자바스크립트는 기본적으로 문자 길이를 제공해준다.
+            console.log(pw.length); //문자 길이가 출력 됨!
+            if(pw.length < 5) {
+                alert('비밀번호는 최소 5글자 이상 입력해야 함!');
+                return false;
+            }
+        }
+    </script>
+</html>
