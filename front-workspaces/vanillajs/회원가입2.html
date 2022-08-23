@@ -176,7 +176,7 @@
           document.getElementById('userId').focus();
           return false;
         }
-        if(id.length < 5 && id.length > 11){
+        if(id.length < 5 || id.length > 11){
           alert('아이디는 5글자 - 11자입니다.');
           document.getElementById('userId').focus();
           return false;
