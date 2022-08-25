@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="table"></div>    
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+    /*
+    제이쿼리(AJAX) :
+    1. HTML(프론트) <-> Java(백엔드) 통신하기 위한 기술.
+    2. 비동기 통신 (디폴트)
+    (비동기/동기)
+    3. 동기로 바꿀 수 있음
+
+    동기 : A가 끝나면 B를 할 수 있음
+    비동기 : A가 끝나기 전에 B를 먼저 할 수 있음
+    */
+    $.ajax({
+        //url : 백엔드 주소
+        url : 'https://fnlwduk0fa.execute-api.ap-northeast-2.amazonaws.com/dw_study_api',
+        //type : 백엔드에 어떤걸 요청할지 타입을 정함
+        //GET:select, POST:insert, PATCH:update, DELETE:delete
+        type : 'GET',
+        //dateType : 서버에서 return 하는 데이터 타입 지정
+        dataType : 'json',
+        success : function(response){
+            console.log(response); //전체 결과 확인
+            for(var i=0; i<response.length; i++){
+                console.log(response[i].ename); //이름만 출력해보기
+                $('#table').append(response[i].ename+"\n");
+            }
+        }
+    });
+</script>
+</html>
