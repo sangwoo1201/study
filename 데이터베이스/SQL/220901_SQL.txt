@@ -1,0 +1,36 @@
+-- join
+select * from emp as e
+inner join dept as d
+on e.deptno = d.deptno
+-- outer join
+select * from emp as e
+right join dept as d
+on e.deptno = d.deptno
+-- self join 
+-- junior: 사원, senior: 사수
+select 
+	junior.empno as '부하 번호',
+	junior.ename as '부하 이름',
+	senior.empno as '사수 번호',
+	senior.ename as '사수 이름'
+from emp as junior
+inner join emp as senior
+on senior.empno = junior.mgr
+where junior.ename = 'SMITH'
+-- SQL 순서
+-- 1. from 2. where 3. group by
+-- 4. having 5. select 6. order by
+
+-- delete from emp
+-- update emp 
+
+-- null 하고 문자 'null' 하고는 다른거!
+-- is null, is not null
+
+-- PK는 중복허용 X (auto index)
+-- FK는 중복이 가능함 (index 없음)
+insert into dept (deptno, dname, loc)
+values (20, 'dw아카데미', '대전 선화동')
+-- 위 SQL은 dept 테이블에 20번 부서가 이미 있으므로 에러 발생!
+
+-- tip) 자주 조회하는 컬럼 일수록 위에다 정의를 해야함
