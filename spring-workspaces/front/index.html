@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <h2>EMP 테이블 데이터 가져오기</h2>
+    <table id="data">
+        <tr>
+            <td>100</td>
+            <td>홍길동</td>
+            <td>MANAGER</td>
+            <td>2022-09-07</td>
+            <td>300</td>
+        </tr>
+    </table>
+</body>
+<!-- jquery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+<script>
+    $.ajax({
+        url : 'http://localhost:8080/emp',
+        type : 'GET',
+        dataType : 'json',
+        success : function(response){
+            console.log(response); //전체 결과 확인
+            var html = '';
+            for(var i=0; i<response.length; i++){
+                html += '<tr><td>'+response[i].empno+'</td><td>'+response[i].ename+'</td><td>'+response[i].job+'</td><td>'+response[i].hiredate+'</td><td>'+response[i].sal+'</td></tr>'
+            }
+            $('#data').append(html);
+        }
+    });
+</script>
+</html>
