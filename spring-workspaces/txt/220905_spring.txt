@@ -1,0 +1,32 @@
+필요한 라이브러리를
+자동으로 다운받음.
+Maven : 
+ XML file로 구성
+*Gradle : 
+ Gradle 프로그래밍 언어
+
+
+https://start.spring.io/ 
+Gradle Project / Java / 2.7.3 / Artifact(이름설정) / 11 / Dependencies(Spring Web)
+
+eclipse -> File -> Import -> Gradle ->Existing Gradle Project -> next x 2
+-> Browse... -> 압축푼파일 선택 -> Finish
+
+Spring 종류
+1. Spring 레거시
+2. Spring boot (v) == 경량 스프링
+3. Egov (국산 스프링 프레임워크)
+  == 전자정부프레임워크
+
+*** JSP (x)
+  목표 : Spring boot로 API서버를 만들어서 
+          프론트(HTML or 안드로이드)와 통신하는 과정을 배우자
+
+Spring에서 패키지를 만들 때는 
+최소 3개부터 만들어야 함
+com.naver.study
+net.<조직이름>.<프로젝트이름>
+kr.
+io.
+
+postman download
