@@ -3,11 +3,14 @@ package com.example.study.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.study.mapper.EmpMapper;
 import com.example.study.vo.DeptVO;
 import com.example.study.vo.EmpVO;
 
@@ -15,6 +18,10 @@ import com.example.study.vo.EmpVO;
 @RestController
 @CrossOrigin
 public class EmpController {
+	
+	//@Autowired Spring에서 객체를 관리(생성과 소멸을 담당하겠다.)해주겠다.
+	@Autowired
+	EmpMapper empMapper;
 	
 	/*
 	 * @ : 어노테이션
@@ -119,8 +126,33 @@ public class EmpController {
 				return list.get(i); //부서번호 일치 deptno 객체 return
 			}
 		}
-		//Arraylist, HashMap 공부
+		//ArrayList, HashMap 공부
 		return null;
 	}
 	
+	@GetMapping("/emp/sal/{money}")
+	public String callEmpSal(@PathVariable String money) {
+		return money;
+	}
+	/*
+	 * ? : 쿼리 스트링
+	 * @PathVariable처럼
+	 * url에 값을 넘겨주는 방법 중 하나.
+	*/
+	// ex) leaderboards/tier?region=kr&page=2
+	@GetMapping("/leaderboards/tier")
+	public String queryStringTest(@RequestParam String region, @RequestParam String page) {
+		return region+", "+page;
+	}
+	
+	// ex) board/search?writer=brian&page=10
+	@GetMapping("/board/search")
+	public String queryStringTest2(@RequestParam String writer, @RequestParam String page) {
+		return writer+", "+page;
+	}
+	
+	@GetMapping("/db/emp")
+	public List<EmpVO> callDbEmp(){
+		return empMapper.selectEmp();
+	}
 }

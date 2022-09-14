@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.study.mapper.EmpMapper">
+	<!-- id에 Interface에서 정의한 메소드 이름을 넣는다. -->
+	<!-- resultType은 SQL결과 return type이다. -->
+	<select id="selectEmp" resultType="com.example.study.vo.EmpVO">
+		SELECT
+			empno,
+			ename
+		FROM emp
+	</select>
+</mapper>
