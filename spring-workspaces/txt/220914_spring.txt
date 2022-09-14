@@ -48,8 +48,8 @@ Spring 으로 데이터베이스 연동하는 방법.
  4-4. postman으로 확인!
 
 
-      /db/emp                                                   Mapper위치
-       URL요청                                                   결과타입
+      /db/emp                                       Mapper위치
+       URL요청                                       결과타입
 Client ------> Controller <------> Mapper <------> mapper.xml
-                                            Interface              SQL
-                                            JAVA
+                                   Interface          SQL
+                                   JAVA
