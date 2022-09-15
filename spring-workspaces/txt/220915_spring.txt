@@ -1,0 +1,7 @@
+*src/main/java
+ => 자바 소스만! 
+*src/main/resources
+ => SQL, 속성파일, html, css, javascript
+
+*build.gradle
+ 우리가 사용하고자 하는 라이브러리(프로그램)을 다운로드 받는 곳

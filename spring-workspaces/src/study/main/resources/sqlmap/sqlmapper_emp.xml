@@ -3,10 +3,33 @@
 <mapper namespace="com.example.study.mapper.EmpMapper">
 	<!-- id에 Interface에서 정의한 메소드 이름을 넣는다. -->
 	<!-- resultType은 SQL결과 return type이다. -->
+	<!-- 쿼리에 컬럼이름과 VO 클래스에 변수이름은 동일해야 한다. -->
+	<!-- VO클래스에 Getter Setter를 만들어야 한다. -->
 	<select id="selectEmp" resultType="com.example.study.vo.EmpVO">
 		SELECT
 			empno,
 			ename
 		FROM emp
+	</select>
+	
+	<!--  -->
+	<select id="selectEmpOne" resultType="com.example.study.vo.EmpVO">
+		SELECT
+			empno,
+			ename,
+			job,
+			sal,
+			hiredate
+		FROM emp
+		WHERE empno = #{empno}
+	</select>
+		
+	<select id="selectDeptOne" resultType="com.example.study.vo.DeptVO">
+		SELECT
+			deptno,
+			dname,
+			loc
+		FROM dept
+		WHERE deptno = #{deptno}
 	</select>
 </mapper>

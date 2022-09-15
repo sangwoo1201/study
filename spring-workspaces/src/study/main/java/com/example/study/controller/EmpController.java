@@ -155,4 +155,27 @@ public class EmpController {
 	public List<EmpVO> callDbEmp(){
 		return empMapper.selectEmp();
 	}
+	
+	//path 방법으로 데이터 받아오기
+	@GetMapping("/db/emp/{empno}")
+	public EmpVO callEmpOne(@PathVariable int empno) {
+		EmpVO vo = empMapper.selectEmpOne(empno);
+		if(empno == 7521) {
+			vo.setSal(0);
+			vo.setHiredate(null);
+		}
+		return vo;
+	}
+	
+	//원하는 부서 조회하기
+	@GetMapping("db/dept/{deptno}")
+	public DeptVO callDeptOne(@PathVariable int deptno) {
+		if(deptno == 10 || deptno == 20) {
+			//return은 더 이상 아래 코드를 실행하지 않는다.
+			return null;
+		}
+		DeptVO vo = empMapper.selectDeptOne(deptno); 
+		return vo;
+	}
+	
 }
