@@ -15,4 +15,9 @@ public interface EmpMapper {
 	public List<EmpVO> selectEmp();
 	public EmpVO selectEmpOne(int empno);
 	public DeptVO selectDeptOne(int deptno);
+	//클린 코드 규칙에서 파라미터 개수가 3개 이상일 때는
+	//객체(class)로 넘겨준다.
+	public int insertEmp(EmpVO vo);
+	public int deleteEmp(int empno);
+	public int updateEmp(EmpVO vo);
 }

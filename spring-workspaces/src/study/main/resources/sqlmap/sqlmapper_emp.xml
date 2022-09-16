@@ -5,7 +5,7 @@
 	<!-- resultType은 SQL결과 return type이다. -->
 	<!-- 쿼리에 컬럼이름과 VO 클래스에 변수이름은 동일해야 한다. -->
 	<!-- VO클래스에 Getter Setter를 만들어야 한다. -->
-	<select id="selectEmp" resultType="com.example.study.vo.EmpVO">
+	<select id="selectEmp" resultType="EmpVO">
 		SELECT
 			empno,
 			ename
@@ -13,7 +13,7 @@
 	</select>
 	
 	<!--  -->
-	<select id="selectEmpOne" resultType="com.example.study.vo.EmpVO">
+	<select id="selectEmpOne" resultType="EmpVO">
 		SELECT
 			empno,
 			ename,
@@ -24,7 +24,7 @@
 		WHERE empno = #{empno}
 	</select>
 		
-	<select id="selectDeptOne" resultType="com.example.study.vo.DeptVO">
+	<select id="selectDeptOne" resultType="DeptVO">
 		SELECT
 			deptno,
 			dname,
@@ -32,4 +32,59 @@
 		FROM dept
 		WHERE deptno = #{deptno}
 	</select>
+	
+	<!-- mybatis insert 문법 -->
+	<insert id="insertEmp">
+		INSERT INTO emp
+		(
+			empno,
+			ename,
+			job,
+			hiredate,
+			sal,
+			deptno
+		)
+		VALUES
+		(
+			#{empno},
+			#{ename},
+			#{job},
+			NOW(),
+			#{sal},
+			#{deptno}
+		)
+	</insert>
+	
+	<!-- mybatis delete 문법 -->
+	<delete id="deleteEmp">
+		DELETE FROM emp
+		WHERE
+			empno = #{empno}
+	</delete>
+	
+	<!-- mybatis update 문법 -->
+	<!-- update, delete 쿼리에 where 조건을 쓰지 않으면 모든 데이터가 적용을 받는다. -->
+	<update id="updateEmp">
+		UPDATE emp
+		SET
+			sal = #{sal},
+			deptno = #{deptno},
+			comm = #{comm}
+		WHERE empno = #{empno}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

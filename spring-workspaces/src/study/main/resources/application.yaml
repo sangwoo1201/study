@@ -7,3 +7,4 @@ spring:
       
 mybatis:
    mapper-locations: classpath:/sqlmap/sqlmapper_*.xml
+   type-aliases-package: com.example.study.vo

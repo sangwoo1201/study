@@ -5,8 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -178,4 +182,41 @@ public class EmpController {
 		return vo;
 	}
 	
+	//EMP테이블에 사원 insert 하기
+	/*
+	 * GET : SELECT
+	 * POST : INSERT
+	 * PATCH : UPDATE
+	 * DELETE : DELETE
+	 * HTTP method!	(시간날 때 구글링 해보기)
+	 * HTTP method가 다르면 url경로 중복 가능.
+	 */
+	@PostMapping("/emp")
+	public int callInsertEmp(@RequestBody EmpVO vo) {
+		System.out.println("사원 번호는 => "+vo.getEmpno());
+		System.out.println("사원 이름은 => "+vo.getEname());
+		System.out.println("사원 직책은 => "+vo.getJob());
+		System.out.println("사원 급여는 => "+vo.getSal());
+		System.out.println("부서 번호는 => "+vo.getDeptno());
+		int row = empMapper.insertEmp(vo);
+		return row;
+	}
+	
+	@DeleteMapping("/emp/{empno}")
+	public int callDeleteEmp(@PathVariable int empno) {
+		System.out.println("사원 번호는 => "+empno);
+		int row = empMapper.deleteEmp(empno);
+		return row;
+	}
+	
+	//update는 insert랑 비슷하다. @RequestBody를 입력해주자!~!
+	@PatchMapping("/emp")
+	public int callUpdateEmp(@RequestBody EmpVO vo) {
+		System.out.println("사원 번호는 => "+vo.getEmpno());
+		System.out.println("사원 보너스는 => "+vo.getComm());
+		System.out.println("사원 급여는 => "+vo.getSal());
+		System.out.println("부서 번호는 => "+vo.getDeptno());
+		int row = empMapper.updateEmp(vo);
+		return row;
+	}
 }

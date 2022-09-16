@@ -1,0 +1,16 @@
+XML 파일에 SQL문을 작성하면 *Mybatis라는 ORM 소프트웨어가
+DB에 접속해서 SQL실행 후 결과를 자바소스로 매핑(연결) 시켜줌
+
+emp 테이블 기준
+empno (PK) : null 허용 금지 (디폴트 값)
+deptno (FK) : null 허용 (디폴트 값)
+    FK는 null 허용함
+단, FK에 not null 조건을 하지 않았다면
+
+@GetMapping
+
+GET : SELECT
+POST : INSERT
+PATCH : UPDATE
+DELETE : DELETE
+HTTP method!
