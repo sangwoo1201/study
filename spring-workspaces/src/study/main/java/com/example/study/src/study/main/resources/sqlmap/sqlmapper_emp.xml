@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.study.mapper.EmpMapper">
+	<!-- id에 Interface에서 정의한 메소드 이름을 넣는다. -->
+	<!-- resultType은 SQL결과 return type이다. -->
+	<!-- 쿼리에 컬럼이름과 VO 클래스에 변수이름은 동일해야 한다. -->
+	<!-- VO클래스에 Getter Setter를 만들어야 한다. -->
+	<select id="selectEmp" resultType="EmpVO">
+		SELECT
+			empno,
+			ename
+		FROM emp
+	</select>
+	
+	<!--  -->
+	<select id="selectEmpOne" resultType="EmpVO">
+		SELECT
+			empno,
+			ename,
+			job,
+			sal,
+			hiredate
+		FROM emp
+		WHERE empno = #{empno}
+	</select>
+		
+	<select id="selectDeptOne" resultType="DeptVO">
+		SELECT
+			deptno,
+			dname,
+			loc
+		FROM dept
+		WHERE deptno = #{deptno}
+	</select>
+	
+	<!-- mybatis insert 문법 -->
+	<insert id="insertEmp">
+		INSERT INTO emp
+		(
+			empno,
+			ename,
+			job,
+			hiredate,
+			sal,
+			deptno
+		)
+		VALUES
+		(
+			#{empno},
+			#{ename},
+			#{job},
+			NOW(),
+			#{sal},
+			#{deptno}
+		)
+	</insert>
+	
+	<!-- mybatis delete 문법 -->
+	<delete id="deleteEmp">
+		DELETE FROM emp
+		WHERE
+			empno = #{empno}
+	</delete>
+	
+	<!-- mybatis update 문법 -->
+	<!-- update, delete 쿼리에 where 조건을 쓰지 않으면 모든 데이터가 적용을 받는다. -->
+	<update id="updateEmp">
+		UPDATE emp
+		SET
+			sal = #{sal},
+			deptno = #{deptno},
+			comm = #{comm}
+		WHERE empno = #{empno}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>
