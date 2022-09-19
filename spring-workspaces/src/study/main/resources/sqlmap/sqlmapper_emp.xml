@@ -73,15 +73,56 @@
 		WHERE empno = #{empno}
 	</update>
 	
+	<select id="selectEmpEname" resultType="EmpVO">
+		SELECT
+			empno,
+			ename,
+			job,
+			sal
+		FROM emp
+		WHERE ename = #{ename}
+	</select>
 	
+	<update id="updateDeptno">
+		UPDATE emp
+		SET
+			comm = #{comm}
+		WHERE deptno = #{deptno}
+	</update>
 	
+	<select id="selectEmpSal" resultType="EmpVO">
+		SELECT
+			empno,
+			ename,
+			job,
+			date_format(hiredate, '%Y') AS hiredate,
+			sal
+		FROM emp
+		WHERE sal >= #{sal}
+	</select>
 	
+	<!-- mybatis join 해보기 -->
+	<select id="selectEmpJoinDept" resultType="map">
+		SELECT
+			e.empno,
+			e.ename,
+			d.dname
+		FROM emp AS e
+		INNER JOIN dept AS d
+		ON e.deptno = d.deptno
+	</select>
 	
-	
-	
-	
-	
-	
+	<select id="selectEmpJoinDept2" resultType="map">
+		SELECT
+			e.empno,
+			e.ename,
+			e.deptno,
+			d.dname,
+			d.loc
+		FROM emp AS e
+		INNER JOIN dept AS d
+		ON e.deptno = d.deptno
+	</select>
 	
 	
 	

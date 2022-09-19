@@ -1,7 +1,10 @@
 package com.example.study.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
+
 import com.example.study.vo.DeptVO;
 import com.example.study.vo.EmpVO;
 
@@ -20,4 +23,11 @@ public interface EmpMapper {
 	public int insertEmp(EmpVO vo);
 	public int deleteEmp(int empno);
 	public int updateEmp(EmpVO vo);
+	public List<EmpVO> selectEmpEname(String ename);
+	public int updateDeptno(EmpVO vo);
+	public List<EmpVO> selectEmpSal(int sal);
+	
+	//join
+	public List<Map<String, Object>> selectEmpJoinDept();
+	public List<Map<String, Object>> selectEmpJoinDept2();
 }

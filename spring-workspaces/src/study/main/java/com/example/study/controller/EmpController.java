@@ -2,6 +2,7 @@ package com.example.study.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -218,5 +219,37 @@ public class EmpController {
 		System.out.println("부서 번호는 => "+vo.getDeptno());
 		int row = empMapper.updateEmp(vo);
 		return row;
+	}
+	
+	//1. 사원이름으로 검색해서 사원번호, 사원이름, 직책, 급여 조회하기(LIKE x)
+	@GetMapping("/emp/ename/{ename}")
+	public List<EmpVO> callEmpEname(@PathVariable String ename) {
+		return empMapper.selectEmpEname(ename);
+	}
+	//2. 부서번호가 10번인 사원들 comm 100으로 update
+	@PatchMapping("/emp/deptno/10")
+	public int callUpdateDeptno(@RequestBody EmpVO vo) {
+		int row = empMapper.updateDeptno(vo);
+		return row;
+	}
+	//3. 급여가 2000 이상인 모든 사원의 번호,이름,직업,입사날짜,급여를 조회하시오.
+	//단 입사날짜는 년도만 보이게 출력하시오.
+	//쿼리 스트링으로 해보기
+	@GetMapping("/emp/sal")
+	public List<EmpVO> callEmpSal(@RequestParam int sal){
+		return empMapper.selectEmpSal(sal);
+	}
+	
+	//Java의 최상위 class는 Object!
+	//Object는 모든 데이터타입 형변환이 가능하다.
+	@GetMapping("/emp/dname")
+	public List<Map<String, Object>> callEmpDname(){
+		return empMapper.selectEmpJoinDept();
+	}
+	
+	@GetMapping("/emp/loc")
+	public List<Map<String, Object>> callEmpLoc(){
+		//문제. 사원번호, 사원이름, 부서번호, 부서이름, 부서위치를 조회하시오.
+		return empMapper.selectEmpJoinDept2();
 	}
 }
