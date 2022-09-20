@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.study.mapper.EmpMapper2">
+	
+	<select id="selectAllEmp" resultType="EmpVO">
+		SELECT
+			empno,
+			ename,
+			sal,
+			hiredate,
+			job,
+			deptno
+		FROM emp
+	</select>
+	
+	<insert id="insertEmp">
+		INSERT INTO emp
+		(
+			empno,
+			ename,
+			job,
+			sal,
+			hiredate,
+			deptno
+		)
+		VALUES
+		(
+			#{empno},
+			#{ename},
+			#{job},
+			#{sal},
+			NOW(),
+			#{deptno}
+		)
+	</insert>
+	
+	<update id="updateEmp">
+		UPDATE emp
+		SET
+			ename = #{ename},
+			job = #{job},
+			sal = #{sal},
+		WHERE
+			empno = #{empno}
+	</update>
+	
+	<delete id="deleteEmp">
+		DELETE FROM emp
+		WHERE empno = #{empno}
+	</delete>
+	
+	<select id="selectEmpJoinDept" resultType="map">
+		SELECT
+			e.empno,
+			e.ename,
+			e.job,
+			e.deptno,
+			d.dname,
+			d.loc
+		FROM emp AS e
+		INNER JOIN dept AS d
+		ON e.deptno = d.deptno
+	</select>
+</mapper>
