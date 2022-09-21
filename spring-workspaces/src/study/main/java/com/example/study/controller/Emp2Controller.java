@@ -55,4 +55,13 @@ public class Emp2Controller {
 	public List<Map<String, Object>> callEmpDept(){
 		return mapper.selectEmpJoinDept();
 	}
+	
+	@GetMapping("/emp/{empno}")
+	public EmpVO callEmpEmpno(@PathVariable int empno) {
+		EmpVO vo = mapper.selectEmpByEmpno(empno); //데이터가 없으면 null이 리턴된다.
+		if(vo == null) { //데이터가 없다면
+			return new EmpVO(); //아무값도 없는 클래스 리턴
+		}
+		return vo;
+	}
 }

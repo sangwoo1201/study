@@ -21,4 +21,6 @@ public interface EmpMapper2 {
 	public int deleteEmp(int empno);
 	//조인
 	public List<Map<String, Object>> selectEmpJoinDept();
+	
+	public EmpVO selectEmpByEmpno(int empno);
 }

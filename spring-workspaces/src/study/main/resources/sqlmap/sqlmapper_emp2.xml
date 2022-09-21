@@ -39,7 +39,7 @@
 		SET
 			ename = #{ename},
 			job = #{job},
-			sal = #{sal},
+			sal = #{sal}
 		WHERE
 			empno = #{empno}
 	</update>
@@ -54,11 +54,20 @@
 			e.empno,
 			e.ename,
 			e.job,
+			e.sal,
 			e.deptno,
 			d.dname,
 			d.loc
 		FROM emp AS e
 		INNER JOIN dept AS d
 		ON e.deptno = d.deptno
+		ORDER BY e.empno ASC
+	</select>
+	
+	<select id="selectEmpByEmpno" resultType="EmpVO">
+		SELECT
+			*
+		FROM emp
+		WHERE empno = #{empno}
 	</select>
 </mapper>

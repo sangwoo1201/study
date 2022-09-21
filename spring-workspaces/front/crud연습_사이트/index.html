@@ -28,9 +28,65 @@
     <div>
         <button onclick="doDelete()">사원 삭제</button>
     </div>
+
+    <h2>사원 조회(전체조회 아님)</h2>
+    <div>
+        <input id="s_empno" type="number" placeholder="사원번호 입력...">
+        <p id="info"></p>
+    </div>
+    <div>
+        <button onclick="doSelectByEmpno()">사원 조회</button>
+    </div>
+
+    <h2>사원 수정</h2>
+    <div>
+        <input id="u_empno" type="number" placeholder="사원 번호 입력">
+        <input id="u_ename" type="text" placeholder="사원 이름 입력">
+        <input id="u_job" type="text" placeholder="사원 직책 입력">
+        <input id="u_sal" type="number" placeholder="사원 급여 입력">
+    </div>
+    <div>
+        <button onclick="doUpdate()">사원 정보 수정</button>
+    </div>
+
+    <h2>사원 전체 조회</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>사원번호</th>
+                <th>이름</th>
+                <th>급여</th>
+                <th>근무지</th>
+                <th>부서이름</th>
+                <th>직책</th>
+            </tr>
+        </thead>
+        <tbody id="data">
+            
+        </tbody>
+    </table>
+    <div>
+        <button onclick="doSelectAll()">전체사원 조회</button>
+    </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 <script>
+    function doSelectAll(){
+        $.ajax({
+            url : 'http://localhost:8080/api/v1/emp/dept',
+            type : 'GET',
+            dataType : 'json',
+            success : function(response){
+                $('#data').empty();
+                var html = '';
+                for(var i=0; i<response.length; i++){
+                    html += '<tr><td>'+response[i].empno+'</td><td>'+response[i].ename+'</td><td>'+response[i].sal+'</td><td>'+response[i].loc+'</td><td>'+response[i].dname+'</td><td>'+response[i].job+'</td></tr>'
+                }
+                $('#data').append(html);
+            }
+        });
+    }
+
     function doJoin(){
         var empno = $("#empno").val(); //id가 empno인 input에 값을 가져온다.
         var ename = $("#ename").val();
@@ -73,18 +129,68 @@
 
         if(confirm('정말로 삭제하시겠습니까?')){
             $.ajax({
-            url : 'http://localhost:8080/api/v1/emp/'+empno,
-            type : 'DELETE',
-            dataType : 'json',
-            success : function(response){
-                if(response > 0){
-                    alert("사원이 삭제 되었습니다.");
+                url : 'http://localhost:8080/api/v1/emp/'+empno,
+                type : 'DELETE',
+                dataType : 'json',
+                success : function(response){
+                    if(response > 0){
+                        alert("사원이 삭제 되었습니다.");
+                    }
                 }
-            }
             });
         }
+    }
 
-        
+    //사원번호로 사원조회하기
+    function doSelectByEmpno(){
+        var empno = $("#s_empno").val(); //사원번호 값 가져오기
+        $.ajax({
+            url : 'http://localhost:8080/api/v1/emp/'+empno,
+            type : 'GET',
+            dataType : 'json',
+            success : function(response){
+                if(response.empno == 0){
+                    alert('없는 사원입니다.');
+                }else{ //있는 사원
+                    $('#info').empty();
+                    var empno = response.empno;
+                    var ename = response.ename;
+                    var job = response.job;
+                    var sal = response.sal;
+                    var hiredate = response.hiredate;
+                    var deptno = response.deptno;
+                    var html = '사원정보 : '+empno+', '+ename+', '+job+', '+sal+', '+hiredate+', '+deptno;
+                    $('#info').append(html);
+                }
+            }
+        });
+    }
+
+    //사원 수정 (update는 insert랑 비슷)
+    function doUpdate(){
+        var empno = $('#u_empno').val();
+        var ename = $('#u_ename').val();
+        var job = $('#u_job').val();
+        var sal = $('#u_sal').val();
+        var jsonData = {
+            "empno" : empno,
+            "ename" : ename,
+            "job" : job,
+            "sal" : sal
+        };
+
+        $.ajax({
+            url : 'http://localhost:8080/api/v1/emp',
+            type : 'PATCH',
+            contentType : 'application/json',
+            dataType : 'json',
+            data : JSON.stringify(jsonData),
+            success : function(response){
+                if(response > 0){
+                    alert("사원정보가 수정 되었습니다.");
+                }
+            }
+        });
     }
 </script>
 </html>
