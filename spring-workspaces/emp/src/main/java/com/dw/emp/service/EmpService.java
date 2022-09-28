@@ -2,9 +2,11 @@ package com.dw.emp.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.dw.emp.mapper.EmpMapper;
 import com.dw.emp.vo.EmpVO;
@@ -45,9 +47,24 @@ public class EmpService {
 		return null; //rows가 0이면 null리턴!
 	}
 	
-	public List<EmpVO> getEmpList(){
+	public List<Map<String, Object>> getEmpList(){
 		//필요에 따라 고객 요구사항이 들어오면 여기서 로직을 구현하면 됩니다.
 		return mapper.selectEmp();
+	}
+	
+	//사원 통계 조회
+	public Map<String, Object> getEmpStatistics(){
+		return mapper.selectEmpStatistics();
+	}
+	
+	//사원 저장
+	public int setEmp(EmpVO vo) {
+		return mapper.insertEmp(vo);
+	}
+	
+	//특정 사원 조회
+	public EmpVO getEmpByEmpno(int empno) {
+		return mapper.selectEmpByEmpno(empno);
 	}
 	
 }

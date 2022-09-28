@@ -23,13 +23,88 @@
 		WHERE empno = #{empno}
 	</delete>
 	
-	<select id="selectEmp" resultType="EmpVO">
+	<select id="selectEmp" resultType="map">
+		SELECT
+			e.empno,
+			e.ename,
+			e.job,
+			e.sal,
+			e.hiredate,
+			d.dname
+		FROM emp AS e
+		INNER JOIN dept AS d
+		ON e.deptno = d.deptno
+		ORDER BY empno
+	</select>
+	
+	<select id="selectEmpStatistics" resultType="map">
+		SELECT 
+			COUNT(empno) AS "empCount",
+			(SELECT ROUND(AVG(sal)) FROM emp) AS "empSalAvg",
+			(SELECT COUNT(deptno) FROM dept) AS "deptCount",
+			(SELECT ROUND(SUM(comm)) FROM emp) AS "empCommSum"
+		FROM emp
+	</select>
+	
+	<!-- 동적 쿼리 작성해보기 -->
+	<insert id="insertEmp">
+		INSERT INTO emp
+		(
+			empno
+			<if test="ename != null">
+				,ename
+			</if>
+			<if test="job != null">
+				,job
+			</if>
+			<if test="sal != 0">
+				,sal
+			</if>
+			<if test="comm != 0">
+				,comm
+			</if>
+			,hiredate
+		)
+		VALUES
+		(
+			#{empno}
+			<if test="ename != null">
+				,#{ename}
+			</if>
+			<if test="job != null">
+				,#{job}
+			</if>
+			<if test="sal != 0">
+				,#{sal}
+			</if>
+			<if test="comm != 0">
+				,#{comm}
+			</if>
+			,NOW()
+		)
+	</insert>
+	
+	<!-- 특정 사원 조회 -->
+	<select id="selectEmpByEmpno" resultType="EmpVO">
 		SELECT
 			empno,
 			ename,
 			job,
-			sal
+			sal,
+			comm
 		FROM emp
+		WHERE empno = #{empno}
 	</select>
+	
+	<!-- 사원 정보 수정 -->
+	<update id="updateEmp">
+		UPDATE emp
+		SET
+			ename = #{ename},
+			job = #{job},
+			sal = #{sal},
+			comm = #{comm}
+		WHERE empno = #{empno}
+	</update>
 	
 </mapper>

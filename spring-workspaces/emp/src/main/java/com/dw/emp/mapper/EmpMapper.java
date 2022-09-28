@@ -1,6 +1,7 @@
 package com.dw.emp.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,5 +20,14 @@ public interface EmpMapper {
 	public int deleteEmp(int empno);
 	
 	//전체 사원 조회
-	public List<EmpVO> selectEmp();
+	public List<Map<String, Object>> selectEmp();
+	
+	//통계 쿼리 조회
+	public Map<String, Object> selectEmpStatistics();
+	
+	//사원 등록
+	public int insertEmp(EmpVO vo);
+	
+	//특정 사원 조회
+	public EmpVO selectEmpByEmpno(int empno);
 }
