@@ -67,4 +67,14 @@ public class EmpService {
 		return mapper.selectEmpByEmpno(empno);
 	}
 	
+	//사원 정보 수정
+	public int getEmpUpdate(EmpVO vo) {
+		return mapper.updateEmp(vo);
+	}
+	
+	//사원 삭제 : 컬럼(is_use)만 수정
+	public int getFireEmp(int empno) {
+		return mapper.fireEmp(empno);
+	}
+	
 }

@@ -34,6 +34,7 @@
 		FROM emp AS e
 		INNER JOIN dept AS d
 		ON e.deptno = d.deptno
+		WHERE e.is_use = 1
 		ORDER BY empno
 	</select>
 	
@@ -104,6 +105,14 @@
 			job = #{job},
 			sal = #{sal},
 			comm = #{comm}
+		WHERE empno = #{empno}
+	</update>
+	
+	<!-- 회원 탈퇴(삭제) -->
+	<update id="fireEmp">
+		UPDATE emp
+		SET
+			is_use = false
 		WHERE empno = #{empno}
 	</update>
 	

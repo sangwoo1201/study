@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -71,5 +72,16 @@ public class EmpController {
 		return service.getEmpByEmpno(empno);
 	}
 	
+	//사원 정보 수정
+	@PatchMapping("/emp")
+	public int callEmpUpdate(@RequestBody EmpVO vo) {
+		return service.getEmpUpdate(vo);
+	}
+	
+	//사원 삭제 여부 수정 (body가 아니라 path로 데이터를 받자)
+	@PatchMapping("/emp/empno/{empno}")
+	public int callEmpUseUpdate(@PathVariable int empno) {
+		return service.getFireEmp(empno);
+	}
 	
 }

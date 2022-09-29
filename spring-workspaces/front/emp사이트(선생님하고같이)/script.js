@@ -116,3 +116,61 @@ function getEmpByEmpno(empno){
         }
     });
 }
+
+//사원 정보 수정(== 추가)
+function updateEmp(){
+    var empno = $('#u_empno').val();
+    var ename = $('#u_ename').val();
+    var job = $('#u_job').val();
+    var sal = $('#u_sal').val();
+    var comm = $('#u_comm').val();
+    
+    var jsonData = {
+        "empno" : empno,
+        "ename" : ename,
+        "job" : job,
+        "sal" : sal,
+        "comm" : comm
+    }
+    $.ajax({
+        url : 'http://localhost:8080/api/v1/emp',
+        type : 'PATCH',
+        contentType : 'application/json',
+        dataType : 'json',
+        data : JSON.stringify(jsonData),
+        success : function(response){
+            if(response > 0){
+                alert('수정 완료!');
+                location.reload(); //자바스크립트에서 제공해주는 새로 고침
+            }
+        }
+    });
+}
+
+//사원 삭제
+//데이터는 곧 자산
+//실제로 기업에서는 데이터를 삭제하지 않고, 삭제 여부 컬럼을 추가해서
+//탈퇴한 회원은 Y 현재 회원은 N으로 관리 한다.
+function fireEmp(){
+
+    var empno = $('#u_empno').val();
+    var ename = $('#u_ename').val();
+
+    $.ajax({
+        url : 'http://localhost:8080/api/v1/emp/empno/'+empno,
+        type : 'PATCH',
+        contentType : 'application/json',
+        dataType : 'json',
+        success : function(response){
+            if(response > 0){
+                alert(ename+' 삭제 완료!');
+                location.reload(); //자바스크립트에서 제공해주는 새로 고침
+            }
+        }
+    });
+}
+
+function downloadExcelFile(){
+    console.log('excel download 버튼 클릭');
+    location.href = 'http://localhost:8080/excel/download'
+}

@@ -30,4 +30,10 @@ public interface EmpMapper {
 	
 	//특정 사원 조회
 	public EmpVO selectEmpByEmpno(int empno);
+	
+	//사원 정보 수정
+	public int updateEmp(EmpVO vo);
+	
+	//사원 삭제
+	public int fireEmp(int empno);
 }

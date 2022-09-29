@@ -66,8 +66,8 @@
                 </div>
                 <div class="btn-area">
                     <input id="boardIdHidden" type="hidden">
-                    <a id="contentUpdate" href="#" class="btn-update">수정</a>
-                    <a id="contentDelete" href="#" class="btn-delete">삭제</a>
+                    <a id="contentUpdate" href="#" class="btn-update" onclick="updateEmp()">수정</a>
+                    <a id="contentDelete" href="#" class="btn-delete" onclick="fireEmp()">삭제</a>
                 </div>
             </div>
         </div>
@@ -152,7 +152,8 @@
              <div class="recentOrders">
                  <div class="cardHeader">
                      <h2>사원 목록</h2>
-                     <a href="#" class="btn">사원 추가</a>
+                     <a href="#" class="btn" style="background-color: #19ce60;" onclick="downloadExcelFile()">엑셀 다운로드</a>
+                     <a href="#" id="empAdd" class="btn">사원 추가</a>
                  </div>
                  <table>
                      <thead>
@@ -196,7 +197,7 @@
       crossorigin="anonymous"
     ></script>
 <script>
-    $('.btn').click(function(){
+    $('#empAdd').click(function(){
         $('.write-popup').css('display', 'block');
     });
     $('.btn-cancel').click(function(){
