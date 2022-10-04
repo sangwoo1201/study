@@ -279,9 +279,10 @@ body{
 .write-popup{
     z-index: 1;
     display: none;
-    position: absolute;
-    left: 0; 
-    right: 0; 
+    position: fixed; /* 가운데 보내기 position ~ transform */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
     margin : 40px auto;
     width: 700px;
     height: 500px;
@@ -421,8 +422,10 @@ body{
     border: 1px solid #dddfeb;
     line-height: 1.45;
     font-size: 18px;
+    margin-right: 5px;
 }
 .pagination a:hover{
+    cursor: pointer;
     background-color: var(--blue);
     color: var(--white);
 }

@@ -34,7 +34,7 @@
 		FROM emp AS e
 		INNER JOIN dept AS d
 		ON e.deptno = d.deptno
-		WHERE e.is_use = 1
+		WHERE e.is_use = true
 		ORDER BY empno
 	</select>
 	
@@ -52,6 +52,8 @@
 		INSERT INTO emp
 		(
 			empno
+			,is_use
+			,deptno
 			<if test="ename != null">
 				,ename
 			</if>
@@ -69,6 +71,8 @@
 		VALUES
 		(
 			#{empno}
+			,true
+			,20
 			<if test="ename != null">
 				,#{ename}
 			</if>

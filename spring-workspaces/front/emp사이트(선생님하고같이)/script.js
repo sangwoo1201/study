@@ -1,5 +1,5 @@
 getStatistics(); //함수 호출
-getEmp(); //함수 호출
+getEmp(1); //함수 호출
 
 //사원 통계정보 불러오기
 function getStatistics(){
@@ -73,27 +73,38 @@ function setEmp(){
 }
 
 //전체 사원 조회하는 함수
-function getEmp(){
+function getEmp(pageNum){
     $.ajax({
-        url : 'http://localhost:8080/api/v1/emp',
+        url : 'http://localhost:8080/api/v1/emp?page='+pageNum,
         type : 'GET',
         dataType : 'json',
         success : function(response){
-            //for문을 이용해서 배열 출력하기
-            //배열하고 for문은 친구!!
-            //response 배열!
+            $('#empData').empty();
+            $('.pagination').empty();
+            console.log(response);
             var html = '';
-            for(var i=0; i<response.length; i++){
-                //부서이름이 SALES인 사원만 출력하기!
-                if(response[i].dname == 'SALES'){ //공부용 코드
-                    //console.log(response[i]);
-                }
+            for(var i=0; i<response.list.length; i++){
                 //사원 목록에 사원 데이터 *바인딩 (== 사원 목록 HTML에 데이터 보여주기)
                 //tbody태그 id : empData에 바인딩 하기!
-                html += '<tr onclick="getEmpByEmpno('+response[i].empno+')"><td>'+response[i].empno+'</td><td>'+response[i].ename+'</td><td>'+response[i].job+
-                        '</td><td>'+response[i].sal+'</td><td>'+response[i].hiredate+'</td><td>'+response[i].dname+'</td></tr>';
+                html += '<tr onclick="getEmpByEmpno('+response.list[i].empno+')"><td>'+response.list[i].empno+'</td><td>'+response.list[i].ename+
+                        '</td><td>'+response.list[i].job+'</td><td>'+response.list[i].sal+'</td><td>'+response.list[i].hiredate+
+                        '</td><td>'+response.list[i].dname+'</td></tr>';
             }
-            $('#empData').append(html);//바인딩 작업!
+            $('#empData').append(html);//table 바인딩 작업!
+
+            var paginationHtml = '';
+            if(response.hasPreviousPage){ //이전 버튼 여부 확인
+                paginationHtml += '<a onclick="getEmp('+(pageNum-1)+')">Previous</a>';
+            }
+            for(var i=0; i<response.navigatepageNums.length; i++){
+                var page = response.navigatepageNums[i];
+                paginationHtml += '<a onclick="getEmp('+page+')">'+page+'</a>';
+            }
+            if(response.hasNextPage){ //다음 버튼 여부 확인
+                paginationHtml += '<a onclick="getEmp('+(pageNum+1)+')">Next</a>';
+            }
+            
+            $('.pagination').append(paginationHtml); //페이징 바인딩 작업!
         }
     });
 }
@@ -170,6 +181,7 @@ function fireEmp(){
     });
 }
 
+//엑셀 다운로드 함수
 function downloadExcelFile(){
     console.log('excel download 버튼 클릭');
     location.href = 'http://localhost:8080/excel/download'

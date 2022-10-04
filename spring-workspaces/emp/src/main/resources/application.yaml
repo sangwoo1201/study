@@ -1,3 +1,4 @@
+# yaml => 설정 파일
 spring:
    datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -8,3 +9,12 @@ spring:
 mybatis:
    mapper-locations: classpath:/sqlmap/sqlmapper_*.xml
    type-aliases-package: com.dw.emp.vo
+   
+pagehelper:
+ ## helper-dialect: 사용하는 데이터 베이스
+ 
+ helper-dialect: mysql
+ 
+ ## reasonable: true (0페이지 1페이지, 13페이지까지 있는데 14페이지 요청이 들어오면 13페이지로 리턴해줌)
+ 
+ reasonable: true

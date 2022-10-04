@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.dw.emp.mapper.EmpMapper;
 import com.dw.emp.vo.EmpVO;
+import com.github.pagehelper.PageHelper;
 
 //@Service : 비즈니스 계층 (비즈니스(= 고객 요구사항)을 여기서 구현하겠다.)
 //서비스 == 비즈니스 (여기서 로직 구현)
@@ -47,8 +48,10 @@ public class EmpService {
 		return null; //rows가 0이면 null리턴!
 	}
 	
-	public List<Map<String, Object>> getEmpList(){
+	public List<Map<String, Object>> getEmpPageList(int page){
 		//필요에 따라 고객 요구사항이 들어오면 여기서 로직을 구현하면 됩니다.
+		int pageSize = 10; //한페이지에 보여줄 게시물 수
+		PageHelper.startPage(page, pageSize);
 		return mapper.selectEmp();
 	}
 	

@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dw.emp.service.EmpService;
 import com.dw.emp.vo.EmpVO;
+import com.github.pagehelper.PageInfo;
 
 //@CroosOrigin : 누구나 자원(소스)을(를) 요청할 수 있게 권한 해제
 @RestController
@@ -49,9 +51,15 @@ public class EmpController {
 	}
 	
 	//전체 사원 조회
+	//PageInfo: 페이징 처리 도와주는 라이브러리!
+	//쿼리스트링으로 수정 ?page=3
 	@GetMapping("/emp")
-	public List<Map<String, Object>> callEmp(){
-		return service.getEmpList();
+	public PageInfo<Map<String, Object>> callEmpPage(@RequestParam int page){
+		
+		List<Map<String, Object>> list = service.getEmpPageList(page);
+		int navigatePages = 5; //한블록에 보여줄 페이지 수(ex 네이버 웹툰은 1블록에 10페이지)
+		
+		return new PageInfo<Map<String, Object>>(list, navigatePages);
 	}
 	
 	//사원정보 통계 조회
