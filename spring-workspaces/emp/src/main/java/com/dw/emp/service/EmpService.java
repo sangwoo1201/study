@@ -60,8 +60,14 @@ public class EmpService {
 		return mapper.selectEmpStatistics();
 	}
 	
-	//사원 저장
+	//사원 등록
 	public int setEmp(EmpVO vo) {
+		//이미 가입된 사원번호인지 체크하기
+		int empno = vo.getEmpno(); //사원번호를 불러온다.
+		int count = mapper.selectCountByEmpno(empno); //이미 가입된 사원 체크 쿼리 호출!
+		if(count > 0) { //만약에 count가 1이면 이미 가입된 사원
+			return 0;
+		}
 		return mapper.insertEmp(vo);
 	}
 	

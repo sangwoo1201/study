@@ -120,4 +120,12 @@
 		WHERE empno = #{empno}
 	</update>
 	
+	<!-- 이미가입된 사원인지 여부 체크하는 쿼리 -->
+	<select id="selectCountByEmpno" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM emp
+		WHERE empno = #{empno}
+	</select>
+	
 </mapper>

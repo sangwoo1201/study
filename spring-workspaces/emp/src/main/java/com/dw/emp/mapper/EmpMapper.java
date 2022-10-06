@@ -36,4 +36,7 @@ public interface EmpMapper {
 	
 	//사원 삭제
 	public int fireEmp(int empno);
+	
+	//이미 가입된 사원인지 아닌지 체크
+	public int selectCountByEmpno(int empno);
 }

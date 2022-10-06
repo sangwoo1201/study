@@ -67,6 +67,8 @@ function setEmp(){
             if(response > 0){
                 alert('사원이 등록 되었습니다.');
                 location.reload(); //자바스크립트에서 제공해주는 새로 고침
+            }else {
+                alert('이미 등록된 사원입니다.🙊')
             }
         }
     });

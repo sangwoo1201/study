@@ -20,6 +20,7 @@ import com.github.pagehelper.PageInfo;
 
 //@CroosOrigin : 누구나 자원(소스)을(를) 요청할 수 있게 권한 해제
 @RestController
+//@RequestMapping : 전역변수 개념
 @RequestMapping("/api/v1")
 @CrossOrigin
 public class EmpController {
