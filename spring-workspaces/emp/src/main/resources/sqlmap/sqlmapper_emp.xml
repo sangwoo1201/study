@@ -7,21 +7,11 @@
 			empno,
 			ename,
 			sal,
-			comm
+			comm,
+			deptno
 		FROM emp
 		WHERE deptno = #{deptno}
 	</select>
-	
-	<update id="updateEmpComm">
-		UPDATE emp
-		SET comm = sal * 0.1
-		WHERE deptno = #{deptno}
-	</update>
-	
-	<delete id="deleteEmp">
-		DELETE FROM emp
-		WHERE empno = #{empno}
-	</delete>
 	
 	<select id="selectEmp" resultType="map">
 		SELECT
@@ -31,15 +21,27 @@
 			e.sal,
 			e.hiredate,
 			d.dname
-		FROM emp AS e
-		INNER JOIN dept AS d
+		FROM EMP AS e
+		LEFT JOIN dept AS d
 		ON e.deptno = d.deptno
 		WHERE e.is_use = true
-		ORDER BY empno
+		ORDER BY e.empno
 	</select>
+
+	<update id="updateEmpComm">
+		UPDATE emp
+		SET comm = sal * 0.1 
+		WHERE deptno = #{deptno}
+	</update>
+	
+	<delete id="deleteEmp">
+		DELETE
+		FROM emp
+		WHERE empno = #{empno}
+	</delete>
 	
 	<select id="selectEmpStatistics" resultType="map">
-		SELECT 
+		SELECT
 			COUNT(empno) AS "empCount",
 			(SELECT ROUND(AVG(sal)) FROM emp) AS "empSalAvg",
 			(SELECT COUNT(deptno) FROM dept) AS "deptCount",
@@ -53,7 +55,6 @@
 		(
 			empno
 			,is_use
-			,deptno
 			<if test="ename != null">
 				,ename
 			</if>
@@ -66,13 +67,15 @@
 			<if test="comm != 0">
 				,comm
 			</if>
+			<if test="deptno != 0">
+				,deptno
+			</if>
 			,hiredate
 		)
 		VALUES
 		(
 			#{empno}
 			,true
-			,20
 			<if test="ename != null">
 				,#{ename}
 			</if>
@@ -85,6 +88,9 @@
 			<if test="comm != 0">
 				,#{comm}
 			</if>
+			<if test="deptno != 0">
+				,#{deptno}
+			</if>
 			,NOW()
 		)
 	</insert>
@@ -96,23 +102,25 @@
 			ename,
 			job,
 			sal,
-			comm
+			comm,
+			deptno
 		FROM emp
 		WHERE empno = #{empno}
 	</select>
 	
-	<!-- 사원 정보 수정 -->
+	<!-- 특정 사원 정보 수정 -->
 	<update id="updateEmp">
 		UPDATE emp
 		SET
 			ename = #{ename},
 			job = #{job},
 			sal = #{sal},
-			comm = #{comm}
+			comm = #{comm},
+			deptno = #{deptno}
 		WHERE empno = #{empno}
 	</update>
 	
-	<!-- 회원 탈퇴(삭제) -->
+	<!-- 특정 회원 탈퇴(삭제) -->
 	<update id="fireEmp">
 		UPDATE emp
 		SET
@@ -120,10 +128,10 @@
 		WHERE empno = #{empno}
 	</update>
 	
-	<!-- 이미가입된 사원인지 여부 체크하는 쿼리 -->
+	<!-- 이미 가입된 사원인지 여부 체크하는 쿼리 -->
 	<select id="selectCountByEmpno" resultType="Integer">
-		SELECT
-			COUNT(*)
+		SELECT 
+			count(*)
 		FROM emp
 		WHERE empno = #{empno}
 	</select>

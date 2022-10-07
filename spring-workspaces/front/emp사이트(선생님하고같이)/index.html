@@ -9,12 +9,12 @@
 </head>
 <body>
     <div class="container">
-        <!-- 사원 작성 팝업 -->
+        <!-- 사원 추가 팝업 -->
         <div class="write-popup">
             <div class="editor">
                 <div class="input-box">
                     <label for="i_empno">사원 번호 : </label>
-                    <input id="i_empno" type="number" placeholder="사원 번호를 입력하세요...">
+                    <input id="i_empno" type="number" placeholder="사원번호를 입력하세요...">
                 </div>
                 <div class="input-box">
                     <label for="i_ename">사원 이름 : </label>
@@ -31,6 +31,10 @@
                 <div class="input-box">
                     <label for="i_comm">보너스 : </label>
                     <input id="i_comm" type="number" placeholder="보너스를 입력하세요...">
+                </div>
+                <div class="input-box">
+                    <label for="i_deptno">부서번호 : </label>
+                    <input id="i_deptno" type="number" placeholder="부서번호를 입력하세요...">
                 </div>
                 <div class="btn-area">
                     <a href="#" class="btn-cancel">취소</a>
@@ -63,6 +67,10 @@
                 <div class="input-box">
                     <label for="u_comm">보너스 : </label>
                     <input id="u_comm" type="number" value="0">
+                </div>
+                <div class="input-box">
+                    <label for="u_deptno">부서번호 : </label>
+                    <input id="u_deptno" type="number" value="0">
                 </div>
                 <div class="btn-area">
                     <input id="boardIdHidden" type="hidden">
@@ -167,29 +175,13 @@
                          </tr>
                      </thead>
                      <tbody id="empData">
-                         <!-- <tr onclick="getBoard()">
-                            <td>7499</td>
-                            <td>ALLEN</td>
-                            <td>SALESMAN</td>
-                            <td>1600</td>
-                            <td>1981-02-20</td>
-                            <td>SALES</td>
-                         </tr>
-                         <tr onclick="getBoard()">
-                            <td>7369</td>
-                            <td>SMITH</td>
-                            <td>CLERK</td>
-                            <td>800</td>
-                            <td>1980-12-17</td>
-                            <td>RESEARCH</td>
-                         </tr>                     -->
                      </tbody>
                  </table>
                  <!-- 페이징 처리하는 HTML -->
                  <div class="pagination">
                     <!-- <a>Previous</a>
                     <a>1</a>
-                    <a>2</a>
+                    <a>2</a>  	
                     <a>3</a>
                     <a>4</a>
                     <a>5</a>
@@ -202,10 +194,9 @@
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"
-    ></script>
+        src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
 <script>
     $('#empAdd').click(function(){
         $('.write-popup').css('display', 'block');
