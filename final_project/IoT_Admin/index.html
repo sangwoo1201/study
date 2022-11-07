@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="title" content="IoT 관제 시스템" />
+    <meta property="article:author" content="Sangwoo Lee" />
+    <meta property="og:type" content="website" />
+    <title>IoT 관제 시스템</title>
+    <!-- 파비콘
+      파비콘 사진은 .ico로 변환을 해줘야 한다! (구글에서 쉽게 검색 가능!)
+    -->
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <!-- index css -->
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="nav">
+        <div class="item">
+          <div class="drone-image">
+            <img src="images/drone_1.jpg" />
+            <!-- 드론(IoT) 고유아이디(UUID) -->
+            <h3>KAZA-556699</h3>
+            <!-- 드론 배터리 정보 -->
+            <p>배터리 잔량 : <span>88%</span></p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="drone-image">
+            <img src="images/drone_2.jpg" />
+            <!-- 드론(IoT) 고유아이디(UUID) -->
+            <h3>ADCC-117700</h3>
+            <!-- 드론 배터리 정보 -->
+            <p>배터리 잔량 : <span>70%</span></p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="drone-image">
+            <img src="images/drone_3.jpg" />
+            <!-- 드론(IoT) 고유아이디(UUID) -->
+            <h3>ZOOP-411133</h3>
+            <!-- 드론 배터리 정보 -->
+            <p>배터리 잔량 : <span>83%</span></p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="drone-image">
+            <img src="images/drone_4.jpg" />
+            <!-- 드론(IoT) 고유아이디(UUID) -->
+            <h3>SAMA-931207</h3>
+            <!-- 드론 배터리 정보 -->
+            <p>배터리 잔량 : <span>93%</span></p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="drone-image">
+            <img src="images/drone_5.jpg" />
+            <!-- 드론(IoT) 고유아이디(UUID) -->
+            <h3>AJJK-200489</h3>
+            <!-- 드론 배터리 정보 -->
+            <p>배터리 잔량 : <span>89%</span></p>
+          </div>
+        </div>
+      </div>
+      <div id="kakao-map" class="map">
+        <div class="drone-init">
+          <a href="#" onclick="">
+            <span>드론 위치 새로고침</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!-- 카카오 맵 사용을 위한 JS -->
+  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=66ae34e1686277862604ac46c932208f"></script>
+  <script>
+    initMap();
+    //맵 초기화 함수
+    function initMap() {
+      var mapContainer = document.getElementById('kakao-map'), // 지도를 표시할 div
+        mapOption = {
+          center: new kakao.maps.LatLng(36.3286904, 127.4229992), // 지도의 중심좌표
+          level: 8, // 지도의 확대 레벨
+        };
+
+      var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+      // 마커가 표시될 위치입니다
+      var positions = [
+        {
+          content: '<div style="margin : 10px;">KAZA-556699</div>',
+          latlng: new kakao.maps.LatLng(36.3286904, 127.4229992),
+        },
+        {
+          content: '<div style="margin : 10px;">ADCC-117700</div>',
+          latlng: new kakao.maps.LatLng(36.3432585, 127.4483054),
+        },
+        {
+          content: '<div style="margin : 10px;">ZOOP-411133</div>',
+          latlng: new kakao.maps.LatLng(36.2996845, 127.3169115),
+        },
+        {
+          content: '<div style="margin : 10px;">SAMA-931207</div>',
+          latlng: new kakao.maps.LatLng(36.3711638, 127.3883444),
+        },
+        {
+          content: '<div style="margin : 10px;">AJJK-200489</div>',
+          latlng: new kakao.maps.LatLng(36.4240196, 127.3958129),
+        },
+      ];
+
+      //마커 여러개 생성하기
+      for (var i = 0; i < positions.length; i++) {
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+          map: map,
+          position: positions[i].latlng,
+        });
+
+        //인포윈도우 생성하기
+        var infowindow = new kakao.maps.InfoWindow({
+          content: positions[i].content,
+        });
+
+        //이벤트 생성하기
+        //Listener란 이벤트를 준비하는걸 의미.
+        kakao.maps.event.addListener(
+          marker,
+          'mouseover',
+          makeOverListener(map, marker, infowindow),
+        );
+        kakao.maps.event.addListener(
+          marker,
+          'mouseout',
+          makeOutListener(infowindow),
+        );
+      }
+    }
+
+    /*
+      자바스크립트 메소드 특징🤗
+      function 함수이름(사과){
+
+      }
+      1. 리턴타입이 없다.
+      2. 파라미터 타입이 없다.
+      3. 리턴에 함수를 작성할 수 있음.(클로저)
+    */
+
+    //인포 윈도우 생성
+    function makeOverListener(map, marker, infowindow) {
+      return function () {
+        infowindow.open(map, marker);
+      };
+    }
+    //인포 윈도우 닫기
+    function makeOutListener(infowindow) {
+      return function () {
+        infowindow.close();
+      };
+    }
+  </script>
+</html>

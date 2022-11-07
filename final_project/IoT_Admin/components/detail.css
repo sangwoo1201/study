@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+/*
+1. margin: 10px; //동서남북 모두 10px 패딩.
+2. margin: 5px(위) 10px(오른쪽&왼쪽) 0(아래);
+3. margin: 5px(위&아래) 10px(오른쪽&왼쪽);
+4. margin: 10px(위) 20px(오른쪽) 30px(아래쪽) 10px(왼쪽);
+*/
+
+.drone-info h4 {
+  font-size: 25px;
+  color: #e74a3b;
+  margin: 0 0 20px;
+}
+/*
+.drone-info > p에 적용된 margin css를 다른 방법으로 수정해보시오~!
+답) margin: 0 0 8px;
+*/
+.drone-info > p {
+  margin-bottom: 8px;
+}
+
+.fa-battery-bolt {
+  color: #ff9300;
+}
+
+.fa-satellite-dish {
+  color: rgb(191, 213, 214);
+}
+
+.fa-map-marker-alt {
+  color: #79b8f3;
+}
+
+.fa-calendar {
+  color: peachpuff;
+}
+
+/* 드론 상세 정보 */
+.drone-info {
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+/* 드론 운행 정보 */
+/* margin, padding, flex css는 3개가 끝 */
+.driving-logs {
+  display: flex;
+  flex-direction: column;
+  height: 450px;
+  padding: 2% 0;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.driving-logs h3 {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.logs-item {
+  text-align: center;
+  width: 100%;
+  font-weight: 500;
+  border: 1px solid #e3e6f0;
+  border-bottom: none;
+  padding: 4%;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.logs-item:hover {
+  color: #fff;
+  background-color: #858796;
+}
+
+.nav {
+  flex-basis: 25%;
+}
