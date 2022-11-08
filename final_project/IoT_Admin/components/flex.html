@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        display: flex;
+        width: 1000px;
+        height: 400px;
+        background-color: #ccc;
+        /* 위로 120px 내려가고 오른쪽 왼쪽 자동으로 맞춰줌 */
+        margin: 120px auto;
+      }
+      .col {
+        height: 100%;
+        flex: 1;
+        color: #fff;
+        padding: 25px;
+        position: relative;
+        transition: 0.6s;
+      }
+      .col:nth-child(1) {
+        background-color: #283491;
+      }
+
+      .col:nth-child(2) {
+        background-color: #f18684;
+      }
+
+      .col:nth-child(3) {
+        background-color: #6ee2f1;
+      }
+      .col h2 {
+        text-align: center;
+        font-size: 22px;
+        font-weight: 600;
+      }
+      .caption {
+        font-size: 12px;
+        margin: 28px 0;
+        display: none;
+      }
+      .caption button {
+        border-radius: 30px;
+        background: transparent;
+        outline: none;
+        border: 1px solid #fff;
+        padding: 8px 18px;
+        color: #fff;
+        font-size: 12px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      .col img {
+        position: absolute;
+        width: 200px;
+        right: 0;
+        bottom: 0;
+      }
+
+      .col:hover {
+        flex-grow: 2.5;
+      }
+      .col:hover .caption {
+        display: block;
+      }
+      .col:hover h2 {
+        text-align: left;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 최적화된 사이트 검색을 위해서 시맨틱 태그(p, header, footer, span ....)를 준수하자. -->
+    <div class="container">
+      <!-- col 시작 -->
+      <div class="col">
+        <h2>크로스핏</h2>
+        <div class="caption">
+          <p>
+            크로스핏은 2000년 미국에서 그레그 글래스먼과 로런 제나이에 의해
+            설립된 피트니스 단체. 상당히 힘들다. 재밌다.😈
+          </p>
+          <!-- button 태그 디폴트는 submit -->
+          <button type="button">Know More</button>
+        </div>
+        <img src="../images/img1.png" alt="크로스핏" />
+      </div>
+      <!-- col 끝 -->
+      <!-- col 시작 -->
+      <div class="col">
+        <h2>웨이트 훈련</h2>
+        <div class="caption">
+          <p>
+            같은 부위의 운동을 휴식 없이 연속적으로 4-6개정도 실시하는
+            훈련법으로 한 부위의 근육을 완전히 지치게 하기 위한 운동 방법이다.
+            혈관의 확장과 근 지구력을 높여 주며 높은 칼로리 소모량이 특징이다.🦾
+          </p>
+          <!-- button 태그 디폴트는 submit -->
+          <button type="button">Know More</button>
+        </div>
+        <img src="../images/img2.png" alt="웨이트 훈련" />
+      </div>
+      <!-- col 끝 -->
+      <!-- col 시작 -->
+      <div class="col">
+        <h2>요가</h2>
+        <div class="caption">
+          <p>
+            고대 인도에서 널리 행해진 종교적 실천법. 심신의 통일·훈련 등에
+            의하여, 물질의 속박에서 자유로워지는 것을 목표로 함.
+          </p>
+          <!-- button 태그 디폴트는 submit -->
+          <button type="button">Know More</button>
+        </div>
+        <img src="../images/img3.png" alt="요가" />
+      </div>
+      <!-- col 끝 -->
+    </div>
+  </body>
+</html>
